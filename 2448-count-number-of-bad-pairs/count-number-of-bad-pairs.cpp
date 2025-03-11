@@ -10,5 +10,7 @@ public:
             diffCount[diff]++;
         }
         return totalPairs;
+
+//kichi nuha commit bass
     }
 };

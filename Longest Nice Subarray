@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int longestNiceSubarray(vector<int>& nums) {
+        int n = nums.size();
+        int left = 0;
+        int windowOr = 0;
+        int maxLength = 0;
+        
+        for (int right = 0; right < n; ++right) {
+            // Check if the current element overlaps with the existing window (bitwise AND).
+            while ((windowOr & nums[right]) != 0) {
+                // If overlap, shrink the window from the left.
+                windowOr ^= nums[left];
+                left++;
+            }
+            
+            // Add the current element to the window (bitwise OR).
+            windowOr |= nums[right];
+            
+            // Update the max length of the window.
+            maxLength = max(maxLength, right - left + 1);
+        }
+        
+        return maxLength;
+    }
+};
